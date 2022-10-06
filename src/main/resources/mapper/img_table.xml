@@ -3,6 +3,11 @@
 <mapper namespace="site.metacoding.miniproject.domain.img_table.ImgTableDao">
 
   <insert id="insert">
-    INSERT INTO img_table(img_path, img_name) VALUES(#{imgPath}, #{imgName})
+    INSERT INTO img_table(img_path, img_name, name) VALUES(#{imgPath}, #{imgName}, #{name})
   </insert>
+  <select id="findByImg" resultType="String">
+    SELECT img_name FROM img_table WHERE name = #{str}
+  </select>
+
+
 </mapper>

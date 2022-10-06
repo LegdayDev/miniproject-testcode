@@ -12,11 +12,8 @@
         </head>
 
         <body>
-            <div class="layout">
-                <form action="upload" method="post" enctype="multipart/form-data">
-                    <input name="file" type="file">
-                    <button type="submit">작성</button>
-                </form>
+            <div>
+                <img src="/files/${name}">
 
             </div>
 
