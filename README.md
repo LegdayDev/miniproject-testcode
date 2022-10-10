@@ -12,6 +12,7 @@ GRANT ALL PRIVILEGES ON greendb.* TO 'green'@'%';
 USE greendb;
 
 
+
 create table user(
    user_id INT primary KEY auto_increment,
    username VARCHAR(20),
@@ -24,7 +25,7 @@ create table user(
 create table recommend(
    recommend_id INT primary KEY auto_increment,
    subject_id INT,
-   subject_id INT,
+   isRecommand BOOLEAN,
    content longtext,
    created_at TIMESTAMP
 );
@@ -60,7 +61,8 @@ create table person_skill(
 create table resume(
   resume_id INT primary KEY auto_increment,
   person_id INT,
-  photo LONGTEXT,
+  resume_title VARCHAR(20),
+  photo blob,
   introduction LONGTEXT,
   my_cloud LONGTEXT,
   created_at TIMESTAMP
@@ -79,7 +81,6 @@ create table company (
    introduction LONGTEXT,
    photo LONGTEXT,
    company_goal LONGTEXT,
-   company_mind LONGTEXT,
    ceo_name VARCHAR(20),
    created_at TIMESTAMP
 );
@@ -87,6 +88,7 @@ create table company (
 create table notice(
    notice_id INT primary KEY auto_increment,
    company_id INT,
+   notice_title VARCHAR(20),
    job VARCHAR(20),
    salary VARCHAR(20),
    degree VARCHAR(20),
@@ -113,15 +115,27 @@ create table submit_resume(
 ```sql
 insert into user(username, password, role, created_at) values('ssar', '1234', 'company', NOW());
 insert into user(username, password, role, created_at) values('cos', '1234', 'person', NOW());
+
 insert into recommend(subject_id, content, created_at) VALUES('1', '추천', NOW());
-insert into subscribe(usgreendber_id, subject_id, created_at) VALUES('2', '3', NOW());
-insert into person(user_id, person_name, person_email, person_phone, is_gender, degree, career, created_at) values('1', '홍길동', 'ssar@nate.com', '01000000000', 0 , '4년제', '1', NOW());
-insert into person_skill(person_id, skill, created_at) VALUES('1', '자바', NOW());
-insert into resume(person_id , photo , introduction , company_id, created_at) VALUES('2', '이력서', '안녕하세요', '3', NOW());
-insert into company (user_id, company_name , company_email , company_phone ,tech , address , history ,  introduction , created_at) VALUES('2', '그린회사', 'cos@nate.com', '01000000000', 'C언어', '부산','2021','안녕하세요', NOW());
-insert into notice(company_id , job , salary , created_at) VALUES('2','프론트 엔드', '3천만원', NOW());
+
+insert into subscribe(user_id, subject_id, created_at) VALUES('2', '3', NOW());
+
+insert into person(user_id, person_name, person_email, person_phone, is_gender, address,degree, career, created_at)
+values('1', '홍길동', 'ssar@nate.com', '01000000000', 0 , '부산광역시' , '4년제', '1', NOW());
+
+INSERT into person_skill(person_id, skill, created_at) VALUES('1', '자바', NOW());
+
+insert into resume(person_id , resume_title, photo , introduction , my_cloud, created_at) 
+VALUES('2', '멋진이력서', '사진값', '안녕하세요',"www.naver.com", NOW());
+
+insert into company (user_id, company_name , company_email , company_phone ,tech , address , history ,  introduction ,photo,company_goal, ceo_name, created_at) 
+VALUES('2', '그린회사', 'cos@nate.com', '01000000000', 'C언어', '부산','2016','안녕하세요','사진값','주식상장이 목표','호날두', NOW());
+
+insert into notice(company_id , notice_title,job , salary ,degree, created_at) 
+VALUES('2','개발자 모셔갑니다','프론트 엔드', '3천만원','4년제', NOW());
+
 insert into need_skill(notice_id , skill , created_at) VALUES('2', '자바스크립트', NOW());
-COMMIT;
+
 ```
 
 ## Tip
