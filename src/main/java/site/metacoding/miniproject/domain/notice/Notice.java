@@ -12,6 +12,7 @@ public class Notice {
 	private Integer companyId;
 	private String noticeTitle;
 	private String job;
-	private Integer salary;
+	private String salary;
+	private String degree;
 	private Timestamp createdAt;
 }
